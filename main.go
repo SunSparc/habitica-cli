@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-client/client"
+	"habitica-cli/client"
 )
 
 func main() {

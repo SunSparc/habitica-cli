@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	"go-client/database"
+	"habitica-cli/database"
 )
 
 // do live stuff here, try not to break the live account, there is no undo

@@ -1,3 +1,3 @@
-module go-client
+module habitica-cli
 
 go 1.12

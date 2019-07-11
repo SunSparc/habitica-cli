@@ -9,7 +9,7 @@ import (
 	"os"
 	"path"
 
-	"go-client/database"
+	"habitica-cli/database"
 )
 
 type HabiticaApiClient struct {
