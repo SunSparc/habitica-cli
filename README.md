@@ -12,5 +12,5 @@ HABITICA_API_KEY
 HABITICA_API_CLIENT
 ```
 
-These variables refer to the [required API headers](https://habitica.fandom.com/wiki/Guidance_for_Comrades#X-Client_Header): `x-api-user`, `x-api-key`, `x-client`.
+These variables refer to the [required API headers](https://habitica.fandom.com/wiki/Guidance_for_Comrades#API_Server_Calls): `x-api-user`, `x-api-key`, `x-client`.
 

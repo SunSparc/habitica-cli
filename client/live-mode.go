@@ -9,7 +9,8 @@ import (
 	"habitica-cli/database"
 )
 
-// do live stuff here, try not to break the live account, there is no undo
+// do live stuff here
+// WARNING: try not to break the live account, there is no undo
 
 type LiveMode struct {
 	HabiticaUser database.HabiticaUser
@@ -21,8 +22,8 @@ func NewLiveMode(user database.HabiticaUser) *LiveMode {
 	}
 }
 
-// TODO: get current list of mounts
-//       compare current and local lists of mounts, update local list of mounts
+// TODO: store a local list of mounts
+// TODO: compare current and local lists of mounts, update local list of mounts
 //       pick a different mount to be current, one that has not been used before or in a long time
 //   Initially, we can just randomly pick a mount that is not the current one
 func (this *LiveMode) ManageMounts() {
@@ -31,11 +32,21 @@ func (this *LiveMode) ManageMounts() {
 	} else {
 		log.Println("currentmount:", this.HabiticaUser.Data.Items.CurrentMount)
 	}
-	mount, err := getRandomItemFromMapOfStringToBool(this.HabiticaUser.Data.Items.Mounts)
-	if err != nil {
-		log.Println(err)
+
+	for {
+		mount, err := getRandomItemFromMapOfStringToBool(this.HabiticaUser.Data.Items.Mounts)
+		if err != nil {
+			log.Println(err)
+		}
+		if mount == this.HabiticaUser.Data.Items.CurrentMount {
+			continue
+		} else {
+			log.Println("Your random mount is:", mount)
+			break
+		}
 	}
-	log.Println("Your random mount is:", mount)
+	// TODO: make PUT request to update currentmount  (https://habitica.com/apidoc/#api-User-UserUpdate)
+	//   ?? PUT https://habitica.com/api/v4/user
 }
 
 func getRandomItemFromMapOfStringToBool(mapSB map[string]bool) (string, error) {
