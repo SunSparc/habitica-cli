@@ -8,6 +8,13 @@ import (
 	"net/http"
 )
 
+type DevMode struct {
+}
+
+func NewDevMode() *DevMode {
+	return &DevMode{}
+}
+
 func setup() {
 	fmt.Println("Max your test character here!")
 }

@@ -23,7 +23,7 @@ type HabiticaApiClient struct {
 }
 
 func NewHabiticaApiClient(mode string) *HabiticaApiClient {
-	hbc := HabiticaApiClient{
+	hbc := &HabiticaApiClient{
 		Mode: mode,
 	}
 	if err := hbc.Config(); err != nil {
@@ -33,7 +33,18 @@ func NewHabiticaApiClient(mode string) *HabiticaApiClient {
 		log.Println("[ERROR] in the gethabiticauser:", err)
 	}
 
-	return &hbc
+	return hbc
+}
+
+func (this *HabiticaApiClient) asdf() {
+	// TODO: decide if we need separate live and dev modes
+	//       things that are done on live can also be done on dev
+	//       things that are done on dev may or may not be able to be done on live
+	//       setup could take care of all the nuances between the two different modes
+	//             and then just return a single object which can be do everything
+	live := NewLiveMode(this.HabiticaUser)
+	// or
+	dev := NewDevMode(this.HabiticaUser)
 }
 
 // TODO: apiClient.storeHabiticaUser()
@@ -105,6 +116,11 @@ func (this *HabiticaApiClient) ConfigLive() error {
 }
 func (this *HabiticaApiClient) ConfigDev() error {
 	this.Host = DEV_HOST
+
+	this.User = "HABITICA_API_USER"
+	this.Key = "HABITICA_API_KEY"
+	this.XClientID = "HABITICA_API_CLIENT"
+
 	response, err := RegisterNewUser(this)
 	if err != nil {
 		log.Println("[ERROR] devmode.RegisterNewUser:", TranslateError(err.Error()))
@@ -114,10 +130,16 @@ func (this *HabiticaApiClient) ConfigDev() error {
 	return nil
 }
 
+// TODO: move RegisterNewUser here for Dev setup
+
 const (
 	LIVE_HOST string = "https://habitica.com/"
 	DEV_HOST  string = "http://localhost:8080/"
 	API_PATH  string = "api"
+
+	DEV_USERNAME string = "test"
+	DEV_PASSWORD string = "test"
+	DEV_EMAIL    string = "test@test.com"
 )
 
 ///////////////

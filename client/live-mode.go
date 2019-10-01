@@ -12,6 +12,8 @@ import (
 // do live stuff here
 // WARNING: try not to break the live account, there is no undo
 
+// TODO: nothing in here is "live" specific (live-setup?)
+
 type LiveMode struct {
 	HabiticaUser database.HabiticaUser
 }

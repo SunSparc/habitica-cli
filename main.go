@@ -14,11 +14,14 @@ func main() {
 	habiticaClient := client.NewHabiticaApiClient("live")
 
 	live := client.NewLiveMode(habiticaClient.HabiticaUser)
+	// TODO: move into the setup
+
 	live.ManageMounts()
+	// should just be client.ManageMounts nothing specific to dev or live
 
 	// TODO: how do we choose what to do? switch flags?
 	switch whatToDo {
-	case "":
+	case "manageMounts":
 		// do it
 	default:
 		// do that
